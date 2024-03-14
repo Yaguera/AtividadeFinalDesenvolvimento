@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro de Supermercado</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../../reset.css">
+  <script src="https://npmcdn.com/parse/dist/parse.min.js"></script>
+  <script>
+    // Initialize Parse
+    Parse.initialize("mqfqFoDGEld8041WYS4D8UUUkqUlNQGJcrKHvuD5", "NZunwBuAWmcS7L7E8Dezcyd0IrKX3RjSARPBJA75"); //PASTE HERE YOUR Back4App APPLICATION ID AND YOUR JavaScript KEY
+    Parse.serverURL = "https://parseapi.back4app.com/";
+
+    // Função para tratar o envio do formulário
+    const handlerSubmit = async (e) => {
+      e.preventDefault();
+
+      // Pegando os valores dos campos de entrada
+      const nomeValue = document.getElementById('nome').value;
+      const enderecoValue = document.getElementById('endereco').value;
+      const emailValue = document.getElementById('email').value;
+      const senhaValue = document.getElementById('senha').value;
+      const cnpjValue = document.getElementById('cnpj').value;
+
+      // Criando um novo objeto do Parse
+      const myNewObject = new Parse.Object('Supermercado');
+      myNewObject.set('nome', nomeValue);
+      myNewObject.set('endereco', enderecoValue);
+      myNewObject.set('email', emailValue);
+      myNewObject.set('senha', senhaValue);
+      myNewObject.set('cnpj', cnpjValue);
+
+      try {
+        // Salvando o objeto no Parse
+        const result = await myNewObject.save();
+        console.log('Supermercado criado', result);
+      } catch (error) {
+        console.error('Erro ao criar Supermercado: ', error);
+      }
+    }
+  </script>
+</head>
+<body>
+  <div class='container'>
+    <form onsubmit="handlerSubmit()" class='form-container' id="supermercado-form">
+      <h1 class='form-title'>Cadastro de Supermercado</h1>
+      <input class='input-field' id='nome' type="text" placeholder="Insira o nome do Supermercado"/>
+      <input class='input-field' id="endereco" type="text" placeholder="Insira o endereço" />
+      <input class='input-field' id="email" type="email" placeholder="Insira o e-mail"/>
+      <input class='input-field' id="senha" type="password" placeholder="Insira a senha"/>
+      <input class='input-field' id="cnpj" type="number" placeholder="Insira o CNPJ"/>
+      <button class='submit-button' type="submit">Criar</button>
+    </form>
+  </div>
+</body>
+</html>
