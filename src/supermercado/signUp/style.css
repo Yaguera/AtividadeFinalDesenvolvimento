@@ -7,7 +7,7 @@
   }
   
   .form-container {
-    width: 30%;
+    width: 350px;
     margin: auto;
     display: flex;
     flex-direction: column;
@@ -44,12 +44,16 @@
     border: none;
     background-color: #047857;
     color: #ffffff;
-    padding: 0.75rem 1rem;
+    padding: 0.5rem 1rem;
     border-radius: 0.25rem;
-    font-size: 1.125rem;
+    font-size: 1.2rem;
   }
   
   .submit-button:hover {
     background-color: #065f46;
   }
   
+  #errorMessage {
+    color: red;
+    margin-top: .5rem;
+  }
