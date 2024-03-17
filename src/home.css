@@ -1,0 +1,100 @@
+header{
+    display: flex;
+    justify-content:  space-between;
+    padding:8px 0;
+}
+
+header h1{
+    color: #065f46;
+}
+
+nav{
+    width: 200px;
+}
+
+nav ul{
+    display: flex;
+    justify-content: space-evenly;
+    gap: 20px;
+}
+
+nav ul li{
+    list-style: none;
+}
+
+nav ul li a{
+    text-decoration: none;
+    color: #065f46;
+    font-size: 18px;
+    font-weight: 5
+}
+
+nav ul:nth-child(1){
+    margin-right: 30px;
+}
+
+#cadastro{
+    background-color: #065f46;
+    color: white;
+    padding: .9rem 1.7rem;
+    border-radius: 1.1rem;
+    
+}
+
+#cadastro:hover{
+    background-color: #047857;
+}
+
+
+.container {
+    max-width: 1200px; /* Define a largura máxima do container */
+    margin: 0 auto;
+}
+
+.content-left {
+position: relative;
+width: 100%;
+}
+
+.content-right {
+position: relative;
+width: 30%;
+background-color: white; /* Assuming primary is a color variable */
+background-size: cover;width: 100%;
+
+background-position: center;
+}
+
+.title {
+font-size: 1.25rem; /* Equivalent to 20px assuming default font size is 16px */
+color: #047857;
+font-family: 'Montserrat', sans-serif; /* Assuming Montserrat is imported */
+}
+
+.main-heading {
+margin-top: 2.5rem; /* Equivalent to 40px */
+font-family: 'Palanquin', sans-serif; /* Assuming Palanquin is imported */
+font-size: 6rem; /* Equivalent to 96px */
+font-weight: bold;
+}
+
+.highlight {
+color: #047857;
+display: inline-block;
+margin-top: 0.75rem; /* Equivalent to 12px */
+}
+
+.button{
+    background-color: #047857;
+    color: white;
+    padding: 1.3rem 4rem;
+    border-radius: .9rem;
+    border: none;
+    font-weight: bold;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.button:hover{
+    background-color: #065f46;
+}

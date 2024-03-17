@@ -57,3 +57,28 @@
     color: red;
     margin-top: .5rem;
   }
+
+  .checkbox-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    padding: .5rem 1rem;
+    border-radius: 0.25rem;
+    background-color: #e5e7eb;
+    border: none;
+  }
+
+  .radio-input{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: rgb(110, 110, 110);
+    font-size: .9rem;
+  }
+
+  .radio-input input[type="radio"] {
+    margin-right: 5px; /* Espaçamento entre o radio button e o texto */
+    margin-top: 7px;
+  }

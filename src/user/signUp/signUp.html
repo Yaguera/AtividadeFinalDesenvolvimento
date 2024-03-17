@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,100;9..40,200;9..40,300;9..40,400;9..40,500;9..40,600;9..40,700;9..40,800;9..40,900;9..40,1000&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../reset.css">
+    <link rel="stylesheet" href="../../../variaveis.css">
+    <link rel="stylesheet" href="../style.css">
+    <script type="text/javascript" src="https://npmcdn.com/parse/dist/parse.min.js"></script>
+    <script>
+        // Initialize Parse
+        Parse.initialize("mqfqFoDGEld8041WYS4D8UUUkqUlNQGJcrKHvuD5", "NZunwBuAWmcS7L7E8Dezcyd0IrKX3RjSARPBJA75"); //PASTE HERE YOUR Back4App APPLICATION ID AND YOUR JavaScript KEY
+        Parse.serverURL = "https://parseapi.back4app.com/";
+
+        let link;
+        const cadastrarUser = async (event) => {
+            event.preventDefault(); // Evita o comportamento padrão do envio do formulário
+
+            // Seleciona o input marcado
+            const inputSelecionado = document.querySelector('input[name="role"]:checked');
+            const username = document.getElementById("username");
+            const password = document.getElementById("senha"); // Corrigido o ID da senha
+            const nomeRede = document.getElementById("nomeRede");
+            const email = document.getElementById("email");
+            const errorMessage = document.getElementById('errorMessage')
+            const checkbox = document.getElementsByClassName("checkbox-container")
+            const Role = Parse.Object.extend('_Role');
+            const roleQuery = new Parse.Query(Role);
+            
+            username.style.border="none";
+            password.style.border="none";
+            nomeRede.style.border="none";
+            email.style.border="none";
+            errorMessage.innerHTML = "";
+
+            let valorSelecionado;
+            
+            // Verifica se algum input está selecionado
+            if (inputSelecionado) {
+                // Obtém o valor do input selecionado
+                valorSelecionado = inputSelecionado.value;
+                
+                // Converte o valor para o correspondente do Back4App
+                if (valorSelecionado == "1"){
+                    valorSelecionado = 'hqyLlRDqUF';
+                } else if (valorSelecionado == "2"){
+                    valorSelecionado = 'KGAxkK4IX1';
+                } else {
+                    valorSelecionado = '4Hth6jXQnq';
+                }
+            } else {
+                // Nenhum input selecionado
+                errorMessage.innerHTML = "Nenhum input selecionado.";
+                checkbox.style.border='1px solid red';
+                return; // Retorna para evitar que o código continue executando
+            }
+
+            // Consulta para obter a função correspondente
+            roleQuery.equalTo('objectId', valorSelecionado);
+
+            try {
+                const role = await roleQuery.first();
+
+                if (role) {
+                    // Cria um novo usuário
+                    const user = new Parse.User();
+                    user.set('username', username.value);
+                    user.set('email', email.value);
+                    user.set('role', role); // Define a função obtida na consulta
+                    user.set('nomeRede', nomeRede.value);
+                    user.set('password', password.value);
+
+                    // Salva o usuário
+                    const userResult = await user.signUp();
+                    link = '../login/login.html'
+                    if (userResult) {
+                        // Redireciona para a URL na variável link
+                        window.location.href = link;
+                    }
+                } else {
+                    errorMessage.innerHTML = 'Erro ao criar Supermercado: ' + error;
+                }
+            } catch (error) {
+                if(error.message == "nomeRede is required"){
+                    errorMessage.innerHTML = "Nome da intituição/Rede é requerido";
+                    nomeRede.style.border='1px solid red';
+                } else if(error.message == "Cannot sign up user with an empty username."){
+                    errorMessage.innerHTML = "Nome de usuário é requerido";
+                    username.style.border='1px solid red';
+                } else if(error.message == "Cannot sign up user with an empty password."){
+                    errorMessage.innerHTML = "Senha é requerida";
+                    password.style.border='1px solid red';
+                } else{
+                    errorMessage.innerHTML = error;
+                }
+            }
+        };
+    
+    </script>
+</head>
+<body>
+    <div class='container'>
+        <form onsubmit="cadastrarUser(event)" class='form-container' id="supermercado-form">
+          <h1 class='form-title'>Sign Up</h1>
+          <input class='input-field' id='username' type="text" placeholder="Insira o nome do Usuário"/>
+          <input class='input-field' id="nomeRede" type="text" placeholder="Insira o nome da Instituição/Rede" />
+          <input class='input-field' id="email" type="email" placeholder="Insira o e-mail" required>
+          <input class='input-field' id="senha" type="password" placeholder="Insira a senha"/>
+          <div class="checkbox-container">
+              <div class="radio-input" >
+                <input class='input-field' id="surpermercado" name="role" value="1" type="radio"/>
+                <label for="surpermercado">Supermercado</label>
+              </div>
+              <div class="radio-input" >
+                <input class='input-field' id="ong" name="role"  value="2" type="radio"/>
+                <label for="ong">Ong</label>
+              </div>
+              <div class="radio-input" >
+                <input class='input-field' id="pessoa" name="role" value="3" type="radio"/>
+                <label for="pessoa">Pessoa</label>
+              </div>
+            </div>
+          <button class='submit-button' type="submit">Criar</button>
+          <p id="errorMessage"></p>
+        </form>
+      </div>
+</body>
+</html>
