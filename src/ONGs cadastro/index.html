@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro de Organizações - Cozinha Solidária</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="text/javascript" src="https://npmcdn.com/parse/dist/parse.min.js"></script>
+  <script>Parse.initialize('mqfqFoDGEld8041WYS4D8UUUkqUlNQGJcrKHvuD5', 'NZunwBuAWmcS7L7E8Dezcyd0IrKX3RjSARPBJA75');
+  Parse.serverURL = 'https://parseapi.back4app.com';</script>
+
+  <script>
+    async function cadastrarOrganizacao(event) {
+      event.preventDefault();
+
+      const nome = document.getElementById('nome').value;
+      const endereco = document.getElementById('endereco').value;
+      const email = document.getElementById('email').value;
+      const senha = document.getElementById('senha').value;
+      const cnpj = document.getElementById('cnpj').value;
+
+      const ONGs = Parse.Object.extend('ONGs');
+      const novaOrganizacao = new ONGs();
+      novaOrganizacao.set('nome', nome);
+      novaOrganizacao.set('endereco', endereco);
+      novaOrganizacao.set('email', email);
+      novaOrganizacao.set('senha', senha);
+      novaOrganizacao.set('cnpj', cnpj);
+
+      try {
+        const result = await novaOrganizacao.save();
+        console.log('Nova organização cadastrada:', result);
+      } catch (error) {
+        console.error('Erro ao cadastrar organização:', error);
+      }
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h2>Cadastro de Organizações</h2>
+    <form onsubmit="cadastrarOrganizacao(event)">
+      <label for="nome">Nome da Organização:</label>
+      <input type="text" id="nome" name="nome" required>
+
+      <label for="endereco">Endereço:</label>
+      <input type="text" id="endereco" name="endereco" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+      
+      <label for="senha">Senha:</label>
+      <input type="password" id="senha" name="senha" required>
+
+      <label for="cnpj">CNPJ:</label>
+      <input type="text" id="cnpj" name="cnpj" required>
+      
+      <button type="submit">Cadastrar</button>
+    </form>
+  </div>
+</body>
+</html>
