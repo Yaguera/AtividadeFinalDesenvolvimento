@@ -46,6 +46,26 @@
         errorMessage.innerHTML = 'Erro ao criar Supermercado: ' + error;
       }
     }
+
+    // Mostrando lista de supermercados cadastrados
+    (async () => {
+      // const list = document.getElementByClassName('list')
+      const supermercado = Parse.Object.extend('supermercado');
+      const query = new Parse.Query(supermercado);
+      // You can also query by using a parameter of an object
+      // query.equalTo('objectId', 'xKue915KBG');
+      try {
+        const results = await query.find();
+        for (const object of results) {
+          // const paragraph = document.createElement('p');
+          // paragraph.textContent = object.get('nome');
+          // list.appendChild(paragraph)
+          console.log(object)
+        }
+      } catch (error) {
+        console.error('Error while fetching supermercado', error);
+      }
+    })();
   </script>
 </head>
 <body>
@@ -60,6 +80,9 @@
       <button class='submit-button' type="submit">Criar</button>
       <p id="errorMessage"></p>
     </form>
+  </div>
+  <div class="list">
+
   </div>
 </body>
 </html>

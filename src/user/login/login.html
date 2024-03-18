@@ -10,10 +10,42 @@
     <link rel="stylesheet" href="../../reset.css">
     <link rel="stylesheet" href="../../../variaveis.css">
     <link rel="stylesheet" href="../style.css">  
+
+    <script type="text/javascript" src="https://npmcdn.com/parse/dist/parse.min.js"></script>
+    <script>
+        // Initialize Parse
+        Parse.initialize("mqfqFoDGEld8041WYS4D8UUUkqUlNQGJcrKHvuD5", "NZunwBuAWmcS7L7E8Dezcyd0IrKX3RjSARPBJA75"); //PASTE HERE YOUR Back4App APPLICATION ID AND YOUR JavaScript KEY
+        Parse.serverURL = "https://parseapi.back4app.com/";
+        const logar = async (e) => {
+          e.preventDefault()
+          const nome = document.getElementById('nome')
+          const senha = document.getElementById('senha')
+          try {
+            // Pass the username and password to logIn function
+            let user = await Parse.User.logIn(nome.value,senha.value);
+            // Do stuff after successful login
+            let link;
+            let roleId = user.get('role').id
+            if(roleId == 'hqyLlRDqUF'){
+              link = "../../supermercado/index.html"
+              window.location.href = link;
+            } else if(roleId == 'KGAxkK4IX1'){
+              link = "../../ong/index.html"
+              window.location.href = link;
+            } else{
+              link = "../../pessoafisica/index.html"
+              window.location.href = link;
+            }
+            console.log('Logged in user', user);
+          } catch (error) {
+            console.error('Error while logging in user', error);
+          }
+        }
+    </script>
 </head>
 <body>
     <div class='container'>
-        <form onsubmit=handlerSubmit(event) class='form-container' id="supermercado-form">
+        <form onsubmit=logar(event) class='form-container' id="supermercado-form">
           <h1 class='form-title'>Login</h1>
           <input class='input-field' id='nome' type="text" placeholder="Insira o username"/>
           <input class='input-field' id="senha" type="password" placeholder="Insira a senha"/>
