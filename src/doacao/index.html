@@ -14,6 +14,7 @@
     </script>
 
   <script>
+
     async function cadastrarDoacao(event) {
       event.preventDefault();
 
@@ -34,7 +35,7 @@
 
       try {
         const result = await novaDoacao.save();
-        alert('Nova doação cadastrada com sucesso!');
+        alert('Nova doação cadastrada com sucesso!!!');
         console.log('Nova doação cadastrada:', result);
       } catch (error) {
         alert('Erro ao cadastrar doação. Por favor, tente novamente.');
