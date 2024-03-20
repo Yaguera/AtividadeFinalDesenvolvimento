@@ -1,3 +1,20 @@
+/* Estilo para os cards */
+.card {
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.card h3 {
+  margin-top: 0;
+}
+
+.card p {
+  margin-bottom: 0;
+}
+
 /* Estilo para a barra de navegação */
 header{
   display: flex;
@@ -97,74 +114,55 @@ margin-top: 0.75rem; /* Equivalent to 12px */
 }
 
 
-/* Reset de Estilos */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    padding: 20px;
-  }
-  
-  h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  
-  form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  label {
-    font-weight: bold;
-    margin-bottom: 8px;
-  }
-  
-  input[type="text"],
-  input[type="number"],
-  input[type="date"] {
-    padding: 10px;
-    margin-bottom: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  button[type="submit"] {
-    padding: 10px 20px;
-    background-color: #065f46;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  button[type="submit"]:hover {
-    background-color: #047857;
-  }
-  
-  /* Mensagem de Alerta */
-  .alert {
-    padding: 10px;
-    margin-bottom: 20px;
-    border-radius: 4px;
-  }
-  
-  .alert-success {
-    background-color: #d4edda;
-    border-color: #c3e6cb;
-    color: #155724;
-  }
-  
-  .alert-error {
-    background-color: #f8d7da;
-    border-color: #f5c6cb;
-    color: #721c24;
-  }
-  
+/* Estilo para a tabela de doadores */
+.container {
+  margin: 20px auto;
+  max-width: 800px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  padding: 8px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+/* Estilo para o formulário de edição */
+#form-edicao {
+  margin-top: 20px;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+#form-edicao label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+#form-edicao input[type="text"],
+#form-edicao input[type="number"] {
+  width: calc(100% - 16px); /* leva em consideração o padding */
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#form-edicao button {
+  padding: 8px 20px;
+  background-color: #00532c; /* Verde escuro */
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}

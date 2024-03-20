@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Doadores</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/parse/3.13.0/parse.min.js"></script>
+  <script type="text/javascript" src="https://npmcdn.com/parse/dist/parse.min.js"></script>  
+  <script>
+    // Initialize Parse
+    Parse.initialize("mqfqFoDGEld8041WYS4D8UUUkqUlNQGJcrKHvuD5", "NZunwBuAWmcS7L7E8Dezcyd0IrKX3RjSARPBJA75");
+    Parse.serverURL = "https://parseapi.back4app.com/";
+
+    let doacaoEditando = null;
+
+    async function carregarDoadores() {
+      const Doacoes = Parse.Object.extend('Doacoes');
+      const query = new Parse.Query(Doacoes);
+      query.select(['nomeDoador', 'valorDoacao', 'dataDoacao']);
+      try {
+        const results = await query.find();
+        exibirListaDoadores(results);
+        exibirInformacoes(results);
+      } catch (error) {
+        console.error('Erro ao carregar doadores:', error);
+      }
+    }
+
+    function calcularTotalDoacao(doacoes) {
+      let totalDoacoes = 0;
+      doacoes.forEach(doacao => {
+        const valorDoacao = doacao.get('valorDoacao') || 0;
+        totalDoacoes += valorDoacao;
+      });
+      return totalDoacoes;
+    }
+
+    function exibirListaDoadores(doacoes) {
+      const tabela = document.getElementById('tabela-doadores');
+      const tbody = tabela.querySelector('tbody');
+      tbody.innerHTML = ''; // Limpa qualquer conteúdo anterior
+      doacoes.forEach(doacao => {
+        const row = document.createElement('tr');
+        const cellNome = document.createElement('td');
+        cellNome.textContent = doacao.get('nomeDoador');
+        row.appendChild(cellNome);
+        const cellValor = document.createElement('td');
+        cellValor.textContent = 'R$ ' + (doacao.get('valorDoacao') || 0).toFixed(2);
+        row.appendChild(cellValor);
+        const cellData = document.createElement('td');
+        const data = new Date(doacao.get('dataDoacao'));
+        cellData.textContent = data.toLocaleDateString('pt-BR');
+        row.appendChild(cellData);
+        
+        // Coluna com botões de editar e excluir
+        const cellBotoes = document.createElement('td');
+        const btnEditar = document.createElement('button');
+        btnEditar.textContent = 'Editar';
+        btnEditar.addEventListener('click', () => editarDoacao(doacao));
+        cellBotoes.appendChild(btnEditar);
+
+        const btnExcluir = document.createElement('button');
+        btnExcluir.textContent = 'Excluir';
+        btnExcluir.addEventListener('click', () => confirmarExclusao(doacao));
+        cellBotoes.appendChild(btnExcluir);
+
+        row.appendChild(cellBotoes);
+
+        tbody.appendChild(row);
+      });
+    }
+
+    function exibirInformacoes(doacoes) {
+      const totalDoadores = new Set(doacoes.map(doacao => doacao.get('nomeDoador'))).size;
+      const totalDoacao = calcularTotalDoacao(doacoes);
+      document.getElementById('totalDoadores').textContent = totalDoadores;
+      document.getElementById('totalDoacao').textContent = 'R$ ' + totalDoacao.toFixed(2);
+    }
+
+    function editarDoacao(doacao) {
+      doacaoEditando = doacao;
+      document.getElementById('nomeDoador').value = doacao.get('nomeDoador');
+      document.getElementById('valorDoacao').value = doacao.get('valorDoacao');
+      document.getElementById('form-edicao').style.display = 'block';
+      document.getElementById('nomeDoador').focus();
+    }
+
+    async function salvarEdicao() {
+      const nomeDoador = document.getElementById('nomeDoador').value;
+      const valorDoacao = parseFloat(document.getElementById('valorDoacao').value);
+      doacaoEditando.set('nomeDoador', nomeDoador);
+      doacaoEditando.set('valorDoacao', valorDoacao);
+      try {
+        await doacaoEditando.save();
+        document.getElementById('form-edicao').style.display = 'none';
+        carregarDoadores();
+        console.log('Doação editada com sucesso.');
+      } catch (error) {
+        console.error('Erro ao salvar edição:', error);
+      }
+    }
+
+    function confirmarExclusao(doacao) {
+      const confirmacao = confirm('Tem certeza que deseja excluir esta doação?');
+      if (confirmacao) {
+        excluirDoacao(doacao);
+      }
+    }
+
+    async function excluirDoacao(doacao) {
+      const Doacoes = Parse.Object.extend('Doacoes');
+      const query = new Parse.Query(Doacoes);
+      try {
+        // Encontrar e excluir a doação pelo seu ID
+        const obj = await query.get(doacao.id);
+        await obj.destroy();
+        // Atualizar a lista após a exclusão
+        carregarDoadores();
+        console.log('Doação excluída com sucesso.');
+      } catch (error) {
+        console.error('Erro ao excluir doação:', error);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      carregarDoadores();
+    });
+  </script>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="container">
+        <header>
+            <h1>Cozinha Solidária</h1>
+            <nav>
+                <ul>
+                    <li><a href="">Menu</a></li>
+                    <li><a id="cadastro" href="../doacao/index.html">Realizar doação</a></li>
+                </ul>
+            </nav>
+        </header>
+    </div>
+
+  <div class="container">
+    <h2>Lista de Doações</h2>
+    <table id="tabela-doadores">
+      <thead>
+        <tr>
+          <th>Nome do Doador</th>
+          <th>Valor da Doação (R$)</th>
+          <th>Data da Doação</th>
+          <th>Ações</th> <!-- Nova coluna para os botões -->
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Aqui serão inseridos os nomes dos doadores -->
+      </tbody>
+    </table>
+    <div class="cards-container">
+        <div class="card">
+          <h3>Total de doações:</h3>
+          <p id="totalDoadores">0</p>
+        </div>
+        <div class="card">
+          <h3>Valor total doado:</h3>
+          <p id="totalDoacao">R$ 0.00</p>
+        </div>
+      </div>
+
+    <!-- Formulário de Edição -->
+    <div id="form-edicao" style="display: none;">
+      <h2>Editar Doação</h2>
+      <form>
+        <label for="nomeDoador">Nome do Doador:</label>
+        <input type="text" id="nomeDoador" required><br><br>
+        <label for="valorDoacao">Valor da Doação (R$):</label>
+        <input type="number" id="valorDoacao" step="0.01" required><br><br>
+        <button type="button" onclick="salvarEdicao()">Salvar</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
