@@ -7,10 +7,9 @@
     <!-- This is the minified production version of Parse JS -->
     <script type="text/javascript" src="https://npmcdn.com/parse/dist/parse.min.js"></script>
     <script>
-        
-        // Initialize Parse
-          Parse.initialize("mqfqFoDGEld8041WYS4D8UUUkqUlNQGJcrKHvuD5", "NZunwBuAWmcS7L7E8Dezcyd0IrKX3RjSARPBJA75"); //PASTE HERE YOUR Back4App APPLICATION ID AND YOUR JavaScript KEY
+          Parse.initialize("mqfqFoDGEld8041WYS4D8UUUkqUlNQGJcrKHvuD5", "NZunwBuAWmcS7L7E8Dezcyd0IrKX3RjSARPBJA75"); 
           Parse.serverURL = "https://parseapi.back4app.com/";
+          const PessoaFisica = Parse.Object.extend("PessoaFisica");
           const cadastrar = async (e) => {
             e.preventDefault()
           const nome = document.getElementById("nome").value 
@@ -24,7 +23,7 @@
           myNewObject.set('senha', senha);
           try {
             const result = await myNewObject.save();
-            // Access the Parse Object attributes using the .GET method
+            
             console.log('PessoaFisica created', result);
           } catch (error) {
             console.error('Error while creating PessoaFisica: ', error);
@@ -34,7 +33,7 @@
 </head>
 <body>
     <h1>Cadastro de Cliente</h1>
-    <form onsubmit= cadastrar(event) action="#" method="post">
+    <form onsubmit="cadastrar(event)" action="#" method="post">
         <label for="nome">Nome:</label><br>
         <input type="text" id="nome" name="nome" required><br>
 

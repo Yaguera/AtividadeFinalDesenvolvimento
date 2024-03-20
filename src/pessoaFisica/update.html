@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="https://npmcdn.com/parse/dist/parse.min.js"></script>
+    <script>
+        Parse.initialize('mqfqFoDGEld8041WYS4D8UUUkqUlNQGJcrKHvuD5', 'NZunwBuAWmcS7L7E8Dezcyd0IrKX3RjSARPBJA75', 'zmAuh2sCwyl1IahLK7oCkZ37kcixwhs51kahDWr6');
+        Parse.serverURL = 'https://parseapi.back4app.com';
+        const PessoaFisica = Parse.Object.extend("PessoaFisica");
+
+        const atualizar = async () => {
+            const nome = document.getElementById('nome').value;
+            const cpf = document.getElementById('cpf').value;
+            const email = document.getElementById('email').value;
+            const senha = document.getElementById('senha').value;
+
+            const query = new Parse.Query(PessoaFisica);
+            try {
+                
+                const object = await query.get('qsVPdpK78I');
+                object.set('nome', nome);
+                object.set('cpf', cpf);
+                object.set('email', email);
+                object.set('senha', senha);
+                try {
+                    const response = await object.save();
+                    
+                    console.log(response.get('nome'));
+                    console.log(response.get('cpf'));
+                    console.log(response.get('email'));
+                    console.log(response.get('senha'));
+                    console.log('PessoaFisica atualizado', response);
+                } catch (error) {
+                    console.error('Erro ao atualizar PessoaFisica', error);
+                }
+            } catch (error) {
+                console.error('Erro ao recuperar objeto PessoaFisica', error);
+            }
+        };
+    </script>
+</head>
+<body>
+    <input type="text" id="nome" placeholder="Nome">
+    <input type="text" id="cpf" placeholder="CPF">
+    <input type="email" id="email" placeholder="Email">
+    <input type="password" id="senha" placeholder="Senha">
+    <button onclick="atualizar()">Atualizar</button>
+</body>
+</html>

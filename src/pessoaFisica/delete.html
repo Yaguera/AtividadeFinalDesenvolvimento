@@ -8,10 +8,11 @@
     <script>
         Parse.initialize("mqfqFoDGEld8041WYS4D8UUUkqUlNQGJcrKHvuD5", "NZunwBuAWmcS7L7E8Dezcyd0IrKX3RjSARPBJA75"); //PASTE HERE YOUR Back4App APPLICATION ID AND YOUR JavaScript KEY
         Parse.serverURL = "https://parseapi.back4app.com/";
+        const PessoaFisica = Parse.Object.extend("PessoaFisica");
         const deletar = async () => {
   const query = new Parse.Query('PessoaFisica');
   try {
-    // here you put the objectId that you want to delete
+    
     const object = await query.get('deqobO2biE');
     try {
       const response = await object.destroy();
