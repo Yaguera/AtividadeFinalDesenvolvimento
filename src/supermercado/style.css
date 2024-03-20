@@ -1,0 +1,89 @@
+/* CSS para classes mais comuns */
+
+  
+  .form-container {
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    padding: 1rem;
+    gap: 5px;
+  }
+  
+  .form-title {
+    margin-top: 50px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 2.25rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    color: #22543d;
+  }
+  
+  .input-field {
+    height: 20px;
+    padding: .5rem .7rem;
+    padding-bottom: 0.5rem;
+    border-radius: 0.25rem;
+    background-color: #e5e7eb;
+    border: none;
+    /* outline: 2px solid #8fa5b6; */
+  }
+
+  .input-field:focus{
+    outline:none;
+  }
+  
+  .submit-button {
+    width: 250px;
+    margin-left: 10px;
+    cursor: pointer;
+    border: none;
+    background-color: #047857;
+    color: #ffffff;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    font-size: 1.2rem;
+  }
+  
+  .submit-button:hover {
+    background-color: #065f46;
+  }
+  
+  #errorMessage {
+    color: red;
+    margin-top: .5rem;
+    text-align: center;
+  }
+
+  #list{
+    margin-top: 30px ;
+  }
+
+  .item{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 50px;
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+  }
+  
+  .item p {
+    width: 200px;
+  }
+
+  .edit-button{
+    padding: 8px;
+    border-radius: .5rem;
+    background-color:#06cc94 ;
+  }
+
+  .delete-button{
+    border-radius: .5rem;
+    background-color: rgb(156, 5, 5);
+    color: white;
+    padding: 8px;
+  }

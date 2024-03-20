@@ -8,81 +8,32 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,100;9..40,200;9..40,300;9..40,400;9..40,500;9..40,600;9..40,700;9..40,800;9..40,900;9..40,1000&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../reset.css">
+  <link rel="stylesheet" href="../reset.css">
   <link rel="stylesheet" href="../../../variaveis.css">
-  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="./style.css">
   
   <script type="text/javascript" src="https://npmcdn.com/parse/dist/parse.min.js"></script>
   <script>
     // Initialize Parse
     Parse.initialize("mqfqFoDGEld8041WYS4D8UUUkqUlNQGJcrKHvuD5", "NZunwBuAWmcS7L7E8Dezcyd0IrKX3RjSARPBJA75"); //PASTE HERE YOUR Back4App APPLICATION ID AND YOUR JavaScript KEY
     Parse.serverURL = "https://parseapi.back4app.com/";
-
-    // Função para tratar o envio do formulário
-    const handlerSubmit = async (e) => {
-      e.preventDefault();
-
-      // Pegando os valores dos campos de entrada
-      const nomeValue = document.getElementById('nome').value;
-      const enderecoValue = document.getElementById('endereco').value;
-      const emailValue = document.getElementById('email').value;
-      const senhaValue = document.getElementById('senha').value;
-      const cnpjValue = document.getElementById('cnpj').value;
-      const errorMessage = document.getElementById('errorMessage')
-
-      // Criando um novo objeto do Parse
-      const myNewObject = new Parse.Object('Supermercado');
-      myNewObject.set('nome', nomeValue);
-      myNewObject.set('endereco', enderecoValue);
-      myNewObject.set('email', emailValue);
-      myNewObject.set('senha', senhaValue);
-      myNewObject.set('cnpj', cnpjValue);
-
-      try {
-        // Salvando o objeto no Parse
-        const result = await myNewObject.save();
-        alert('Supermercado criado');
-      } catch (error) {
-        errorMessage.innerHTML = 'Erro ao criar Supermercado: ' + error;
-      }
-    }
-
-    // Mostrando lista de supermercados cadastrados
-    (async () => {
-      // const list = document.getElementByClassName('list')
-      const supermercado = Parse.Object.extend('supermercado');
-      const query = new Parse.Query(supermercado);
-      // You can also query by using a parameter of an object
-      // query.equalTo('objectId', 'xKue915KBG');
-      try {
-        const results = await query.find();
-        for (const object of results) {
-          // const paragraph = document.createElement('p');
-          // paragraph.textContent = object.get('nome');
-          // list.appendChild(paragraph)
-          console.log(object)
-        }
-      } catch (error) {
-        console.error('Error while fetching supermercado', error);
-      }
-    })();
   </script>
 </head>
 <body>
   <div class='container'>
+    <h1 class='form-title'>Cadastro de Supermercado</h1>
     <form onsubmit=handlerSubmit(event) class='form-container' id="supermercado-form">
-      <h1 class='form-title'>Cadastro de Supermercado</h1>
-      <input class='input-field' id='nome' type="text" placeholder="Insira o nome do Supermercado"/>
+      <input class='input-field' id='nome' type="text" placeholder="Nome do Supermercado"/>
       <input class='input-field' id="endereco" type="text" placeholder="Insira o endereço" />
       <input class='input-field' id="email" type="email" placeholder="Insira o e-mail"/>
-      <input class='input-field' id="senha" type="password" placeholder="Insira a senha"/>
       <input class='input-field' id="cnpj" type="number" placeholder="Insira o CNPJ"/>
       <button class='submit-button' type="submit">Criar</button>
-      <p id="errorMessage"></p>
     </form>
+    <p id="errorMessage"></p>
   </div>
-  <div class="list">
+  <div id="list">
 
   </div>
+  <script src="index.js"></script>
 </body>
 </html>
