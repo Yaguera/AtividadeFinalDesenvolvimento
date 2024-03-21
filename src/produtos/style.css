@@ -1,0 +1,149 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+header {
+    padding: 30px 50px;
+    border-bottom: 1px solid #065f46;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h1 {
+    color: #065f46;
+    font-size: 35px;
+}
+
+nav ul {
+    display: flex;
+    justify-content: space-between;
+    gap: 25px;
+}
+
+nav ul li , .submit-button, #listasDeProdutos li div button{
+    padding: 15px;
+    list-style: none;
+
+    background-color: #0fbc8b;
+    border-radius: 20px;
+}
+
+nav ul li:hover, .submit-button:hover, #listasDeProdutos li div button:hover  {
+    background-color: #0c8a66;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+} 
+
+#TodosProdutos {
+    width: 1250px;
+    margin: auto;
+    text-align: center;
+}
+
+#listasDeProdutos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+}
+
+#listasDeProdutos li {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+
+    width: 400px;
+    max-height: 400px;
+
+    padding: 20px;
+
+    list-style: none;
+
+    background-color: #f5f5f5;
+
+    border: 2px solid #b2aeae;
+    border-radius: 8px;
+}
+
+#listasDeProdutos li h2 {
+    font-size: 25px;
+}
+
+#listasDeProdutos li p {
+    font-size: 16px;
+}
+
+#listasDeProdutos li div {
+    display: flex;
+    gap: 20px;
+}
+
+#listasDeProdutos li div button {
+    width: 50%;
+    padding: 15px 0;
+}
+
+#cadastro-produtos {
+    margin-bottom: 60px;
+    padding: 50px 30px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+}
+
+fieldset {
+    border: none;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+legend {
+    color: #065f46;
+    font-size: 30px;
+    font-weight: bold;
+    margin: 25px;
+}
+
+.input-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.input-wrapper label {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.input-wrapper input {
+    border-radius: 20px;
+    border: 2px solid rgb(200, 194, 194);
+    padding: 15px 20px;
+    font-size: 16px;
+}
+
+.submit-button {
+    width: 15%;
+    font-size: 16px;
+    font-weight: bold;
+}
