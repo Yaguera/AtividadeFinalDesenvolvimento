@@ -1,54 +1,55 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="./style.css">
 
-    <script type="text/javascript" src="https://npmcdn.com/parse/dist/parse.min.js"></script>
-    <script src="./main.js"></script>
+    <script type="text/javascript" src="https://npmcdn.com/parse/dist/parse.min.js" defer></script>
+    <script src="./components/cardProduto.js" defer></script>
+    <script src="./main.js" defer></script>
 
     <title>Cozinha Solidária</title>
-</head>
-<body>
+  </head>
+  <body>
     <header>
       <nav>
           <h1>Cozinha Solidária</h1>
         <ul>
           <li><a href="#produtos-cadastrados">Produtos Cadastrados</a></li>
-          <li><a href="#cadastro-produtos">Adicionar Produto</a></li>
+          <li><a href="#cadastro-produtos" id="btn-cadastrar">Adicionar Produto</a></li>
         </ul>
       </nav>
     </header>
+
     <div id="produtos-cadastrados">
       <ul id="listasDeProdutos"></ul>
     </div>
-    </div>
-      <div id="cadastro-produtos">
-        <form onsubmit="formSubmit(event)"id="produto-form">
-          <fieldset>
-            <Legend>Cadastro de Produto</Legend>
-            <div class="input-wrapper">
-              <label for="nome">Nome do Produto: </label>
-              <input class='input-field' id='nome' type="text" required/>
-            </div>
-            <div class="input-wrapper">
-              <label for="tipo">Tipo do Produto: </label>
-              <input class='input-field' id="tipo" type="text" required/>
-            </div>
-            <div class="input-wrapper">
-              <label for="quantidade">Quantidade no estoque(Kg)</label>
-              <input class='input-field' id="quantidade" type="number" required/>
-            </div>
-            <div class="input-wrapper">
-              <label for="validade">Validade do Produto:</label>
-              <input class='input-field' id="validade" type="date" required/>
-            </div>
-          </fieldset>
-          <button class='submit-button' type="submit" form="produto-form">Criar</button>
-        </form>
-      </div>
     
-</body>
+    <div id="form-cadastro-produtos">
+      <form id="produto-form">
+        <fieldset>
+          <Legend>Cadastro de Produto</Legend>
+          <div class="input-wrapper">
+            <label for="nome">Nome do Produto: </label>
+            <input class='input-field' id='nome' type="text" required/>
+          </div>
+          <div class="input-wrapper">
+            <label for="tipo">Tipo do Produto: </label>
+            <input class='input-field' id="tipo" type="text" required/>
+          </div>
+          <div class="input-wrapper">
+            <label for="quantidade">Quantidade no estoque(Kg)</label>
+            <input class='input-field' id="quantidade" type="number" required/>
+          </div>
+          <div class="input-wrapper">
+            <label for="validade">Validade do Produto:</label>
+            <input class='input-field' id="validade" type="date" required/>
+          </div>
+        </fieldset>
+        <button id="btn-submit" class='submit-button' type="submit" form="produto-form">Criar</button>
+      </form>
+    </div>
+  </body>
 </html>
